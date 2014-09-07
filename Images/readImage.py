@@ -19,7 +19,7 @@ img = cv2.imread('godzilla.jpg', 0)
 # cv2.imshow() : first argument is the window name, second argument is the image
 cv2.imshow('Grayscale', img)
 
-# Display the color img in a resizable window
+# Display the color img in a resizable window. By default, the flag is cv2.WINDOW_AUTOSIZE
 cv2.namedWindow('Resizable Color', cv2.WINDOW_NORMAL)
 img2 = cv2.imread('godzilla.jpg', -1)
 cv2.imshow('Resizable Color', img2)

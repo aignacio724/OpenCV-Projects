@@ -20,14 +20,11 @@ cv2.imshow('Godzilla', img)
 grayImg = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) 
 cv2.imshow('Gray Godzilla', grayImg)
 
-# save a grayscale version of the image
-# cv2.imwrite() : first argument is the file name, second argument is the image we want to save
-#cv2.imwrite('godzillagray.png', grayImg)
-
 # cv2.waitKey is a keyboard binding function. Its argument is the time in milliseconds.
 key = cv2.waitKey(0) & 0xFF
 
 # Save the image if the 's' key is pressed
+# cv2.imwrite() : first argument is the file name, second argument is the image we want to save
 if key == ord('s'):
     cv2.imwrite('godzillagray.png', grayImg)
     
