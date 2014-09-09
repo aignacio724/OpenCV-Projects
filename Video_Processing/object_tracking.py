@@ -27,6 +27,14 @@ cv2.createTrackbar('R','Color Adjust',255,255,nothing)
 cv2.createTrackbar('G','Color Adjust',0,255,nothing)
 cv2.createTrackbar('B','Color Adjust',0,255,nothing)
 
+thresh_ammount = 10
+
+# Set and create the hsv thresholds (lower and upper)  
+# the desired color in my case lower end [low_hue, 50 ,50] and [high_hue, 255,255]
+low_sat,low_val = (50,50)
+high_sat,high_val = (255,255)
+
+
 while True:
 
     cv2.imshow('Color Adjust', window1)
@@ -55,19 +63,15 @@ while True:
     # Depending on Hue value, subtrac or add threshold value
     if hue < 10: 
         low_hue = hue
-        high_hue = hue + 10
+        high_hue = hue + thresh_ammount 
     elif hue > 245:
-        low_hue = hue - 10
+        low_hue = hue - thresh_ammount
         high_hue = hue
     else: 
-        low_hue = hue - 10
-        high_hue = hue + 10
+        low_hue = hue - thresh_ammount 
+        high_hue = hue + thresh_ammount 
 
-    # Set and create the hsv thresholds (lower and upper) . HSV ranges to 
-    #  the desired color is in my case lower end [x, 50 ,50] and y[25,25,30]
-    low_sat,low_val = (50,50)
-    high_sat,high_val = (255,255)
-
+    # Set and create the hsv thresholds (lower and upper)  
     low_hsv = np.array([low_hue,low_sat,low_val])
     high_hsv = np.array([high_hue,high_sat,high_val])
     
