@@ -1,7 +1,9 @@
 #!/usr/bin/python
 
 ''' This is a simple object tracking program using
-    OpenCV-Python. Use color thresholding to adjust color tracking'''
+    OpenCV-Python. Use color thresholding to adjust color tracking
+    Try to draw a box around object of interest and get color range
+    from object in region of interest'''
 
 # Color conversion flags 
 # cv2.COLOR_BGR2GRAY
@@ -46,6 +48,12 @@ while True:
     if returnVal != True:
         print "!!!!! Error getting frame\n"
     
+##########
+# TODO: Need to add a second window for drawing
+#       Cannot draw directly onto video frame, each frame is over writting
+#       mouse event
+##########
+
     # Convert BGR to HSV
     cv2.addWeighted(overlay, 0.4, frame, 1 - 0.4, 0, frame)
     cv2.imshow('Video Feed',frame)
