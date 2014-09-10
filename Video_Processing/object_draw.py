@@ -18,24 +18,19 @@ cv2.namedWindow('Video Feed')
 
 # Globals used for drawing function
 drawing = False
-ix,iy = -1,-1
+#global x1,y1,x2,y2
+x1,y1 = -1,-1
+x2,y2 = -1,-1
 
 def draw_rect(event,x,y,flags,param):
-    global ix,iy,drawing
+    global x1,y1,x2,y2
 
     if event == cv2.EVENT_LBUTTONDOWN:
         print "pressed"
-        drawing = True
-        ix,iy = x,y
-    elif event == cv2.EVENT_MOUSEMOVE:
-        print "move"
-        if drawing == True:
-            cv2.rectangle(overlay,(ix,iy),(x,y),(0,255,0),1)
+        x1,y1 = x,y
     elif event == cv2.EVENT_LBUTTONUP:
         print "depressed"
-        drawing = False
-        cv2.rectangle(overlay,(ix,iy),(x,y),(0,255,0),1)
-
+        x2,y2 = x,y
 
 cv2.setMouseCallback('Video Feed', draw_rect)
 
@@ -43,21 +38,21 @@ while True:
 
     # Take each frame of the video feed
     returnVal , frame = capture.read()
-    overlay = frame.copy()
 
     if returnVal != True:
         print "!!!!! Error getting frame\n"
-    
+        break
+
 ##########
 # TODO: Need to add a second window for drawing
 #       Cannot draw directly onto video frame, each frame is over writting
 #       mouse event
+# DoNotNeed
 ##########
 
-    # Convert BGR to HSV
-    cv2.addWeighted(overlay, 0.4, frame, 1 - 0.4, 0, frame)
+    #print "x1: %r y1: %r x2: %r y2: %r" % (x1,y1,x2,y2)
+    cv2.rectangle(frame,(x1,y1),(x2,y2),(0,255,0),1)
     cv2.imshow('Video Feed',frame)
-
     k = cv2.waitKey(1) & 0xFF
     if k == ord('q'):
         break
